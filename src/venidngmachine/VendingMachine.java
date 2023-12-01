@@ -9,7 +9,7 @@ public interface VendingMachine {
 
      void selectProduct(Product product);
 
-     void insertMoney(Coin money);
+     void insertCoin(Coin money);
 
      Bucket<Product, List<Coin>> dispenseItemAndChange();
 
