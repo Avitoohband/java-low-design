@@ -1,7 +1,7 @@
 package venidngmachine;
 
 import exception.venidingmachine.ProductNotSelectedException;
-import exception.venidingmachine.NoSufficientChangeException;
+import exception.venidingmachine.InsufficientChangeException;
 import exception.venidingmachine.InsufficientPaymentException;
 import exception.venidingmachine.OutOfSupplyException;
 import util.CollectionUtil;
@@ -62,7 +62,7 @@ public class vendingMachineImpl implements VendingMachine {
                 int changeNeeded = currentBalance - itemPrice;
                 List<Coin> change = dispenseChange(changeNeeded);
                 bucket = new Bucket<>(selectedProduct, change);
-            } catch (NoSufficientChangeException ex) {
+            } catch (InsufficientChangeException ex) {
                 System.out.println(ex.getMessage());
                 resetCurrentBuy();
                 return null;
@@ -137,7 +137,7 @@ public class vendingMachineImpl implements VendingMachine {
                 change.add(Coin.PENNY);
                 changeNeeded -= Coin.PENNY.getCoinValue();
             } else {
-                throw new NoSufficientChangeException("Not enough change in the machine!");
+                throw new InsufficientChangeException("Not enough change in the machine!");
             }
         }
         return change;

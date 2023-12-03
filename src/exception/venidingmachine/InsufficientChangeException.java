@@ -1,8 +1,8 @@
 package exception.venidingmachine;
 
-public class NoSufficientChangeException extends  RuntimeException{
+public class InsufficientChangeException extends  RuntimeException{
 
-    public NoSufficientChangeException(String message) {
+    public InsufficientChangeException(String message) {
         super(message);
     }
 
