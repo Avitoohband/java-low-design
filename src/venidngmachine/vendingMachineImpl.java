@@ -1,13 +1,15 @@
 package venidngmachine;
 
+import exception.venidingmachine.ProductNotSelectedException;
 import exception.venidingmachine.NoSufficientChangeException;
-import exception.venidingmachine.NotPaidEnoughException;
+import exception.venidingmachine.InsufficientPaymentException;
 import exception.venidingmachine.OutOfSupplyException;
 import util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class vendingMachineImpl implements VendingMachine {
     private final Inventory<Coin> coinInventory = new Inventory<>();
@@ -29,15 +31,14 @@ public class vendingMachineImpl implements VendingMachine {
 
     @Override
     public void selectProduct(Product product) {
-        if (itemInventory.hasItem(product)) {
-            selectedProduct = product;
-        } else {
+        if (!itemInventory.hasItem(product)) {
             throw new OutOfSupplyException(String.format("Item: %s is out of supply!", product.getProductName()));
         }
+        selectedProduct = product;
     }
 
     @Override
-    public void insertMoney(Coin coin) {
+    public void insertCoin(Coin coin) {
         if (CollectionUtil.isEmpty(coinsInserted)) {
             coinsInserted = new ArrayList<>();
         }
@@ -49,6 +50,10 @@ public class vendingMachineImpl implements VendingMachine {
 
     @Override
     public Bucket<Product, List<Coin>> dispenseItemAndChange() {
+
+        if (Objects.isNull(selectedProduct)) {
+            throw new ProductNotSelectedException("Must select product first");
+        }
         Bucket<Product, List<Coin>> bucket;
         int itemPrice = selectedProduct.getPrice();
 
@@ -57,20 +62,17 @@ public class vendingMachineImpl implements VendingMachine {
                 int changeNeeded = currentBalance - itemPrice;
                 List<Coin> change = dispenseChange(changeNeeded);
                 bucket = new Bucket<>(selectedProduct, change);
-            }catch (NoSufficientChangeException ex){
+            } catch (NoSufficientChangeException ex) {
                 System.out.println(ex.getMessage());
                 resetCurrentBuy();
                 return null;
             }
-            int changeNeeded = currentBalance - itemPrice;
-            List<Coin> change = dispenseChange(changeNeeded);
-            bucket = new Bucket<>(selectedProduct, change);
         } else if (currentBalance == itemPrice) {
             bucket = new Bucket<>(selectedProduct, Collections.emptyList());
         } else {
+            int missingMoney = itemPrice - currentBalance;
             resetCurrentBuy();
-            throw new NotPaidEnoughException(String.format("You are missing %d. Payment is not enough",
-                    itemPrice - currentBalance));
+            throw new InsufficientPaymentException(String.format("You are missing %d. Payment is not enought!", missingMoney));
         }
         itemInventory.withdrawItem(selectedProduct);
         resetCurrentBuy();
@@ -98,7 +100,7 @@ public class vendingMachineImpl implements VendingMachine {
         initiateVendingMachine();
     }
 
-    private void resetCurrentBuy(){
+    private void resetCurrentBuy() {
         selectedProduct = null;
         coinsInserted.clear();
         currentBalance = 0;
@@ -122,14 +124,14 @@ public class vendingMachineImpl implements VendingMachine {
                     && coinInventory.getQuantity(Coin.QUARTER) > 0) {
                 change.add(Coin.QUARTER);
                 changeNeeded -= Coin.QUARTER.getCoinValue();
-            } else if (changeNeeded >= Coin.NICKEL.getCoinValue()
-                    && coinInventory.getQuantity(Coin.NICKEL) > 0) {
-                change.add(Coin.NICKEL);
-                changeNeeded -= Coin.NICKEL.getCoinValue();
             } else if (changeNeeded >= Coin.DIME.getCoinValue()
                     && coinInventory.getQuantity(Coin.DIME) > 0) {
                 change.add(Coin.DIME);
                 changeNeeded -= Coin.DIME.getCoinValue();
+            } else if (changeNeeded >= Coin.NICKEL.getCoinValue()
+                    && coinInventory.getQuantity(Coin.NICKEL) > 0) {
+                change.add(Coin.NICKEL);
+                changeNeeded -= Coin.NICKEL.getCoinValue();
             } else if (changeNeeded >= Coin.PENNY.getCoinValue()
                     && coinInventory.getQuantity(Coin.PENNY) > 0) {
                 change.add(Coin.PENNY);
@@ -137,7 +139,6 @@ public class vendingMachineImpl implements VendingMachine {
             } else {
                 throw new NoSufficientChangeException("Not enough change in the machine!");
             }
-
         }
         return change;
     }
