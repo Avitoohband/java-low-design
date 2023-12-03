@@ -5,12 +5,10 @@ import ratelimiter.TokenBucketRateLimiter;
 
 public class Main {
     public static void main(String[] args) {
-        TokenBucketRateLimiter tokenBucketRateLimiter = new TokenBucketRateLimiter(
-                Constants.maxBucketSize, Constants.tokensPerRefill, Constants.timeBetweenRefills
-                );
+        TokenBucketRateLimiter tokenBucketRateLimiter = TokenBucketRateLimiter.ofDefault();
 
-        int numberOfSuccessfulConsumes = 0;
-        long numberOfUnsuccessfulConsumes = 0;
+        int successfulConsumes = 0;
+        long unsuccessfulConsumes = 0;
 
         long startTimeMillis = System.currentTimeMillis();
 
@@ -19,11 +17,11 @@ public class Main {
 
             if(isSucceed){
                 System.out.println("Consume Succeed");
-                numberOfSuccessfulConsumes++;
+                successfulConsumes++;
             }else {
-                numberOfUnsuccessfulConsumes++;
-                if(numberOfUnsuccessfulConsumes % 100_000_000 == 0){
-                    System.out.println(numberOfUnsuccessfulConsumes + ": requests have been blocked.");
+                unsuccessfulConsumes++;
+                if(unsuccessfulConsumes % 100_000_000 == 0){
+                    System.out.println(unsuccessfulConsumes + ": requests have been blocked.");
 
                 }
             }
@@ -33,9 +31,9 @@ public class Main {
 
         System.out.println();
         System.out.println("The time the process took: " + (endTimeMillis - startTimeMillis));
-        System.out.println("Number of successful consumes: " + numberOfSuccessfulConsumes);
+        System.out.println("Number of successful consumes: " + successfulConsumes);
         System.out.println("Number of expected consumes: " + Constants.tokensPerRefill * 10);
-        System.out.println("A total of: " + numberOfUnsuccessfulConsumes + " requests have been blocked.");
+        System.out.println("A total of: " + unsuccessfulConsumes + " requests have been blocked.");
 
 
 

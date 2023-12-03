@@ -18,6 +18,12 @@ public class TokenBucketRateLimiter {
         this.tokensAvailable = new AtomicInteger(0);
     }
 
+    public static TokenBucketRateLimiter ofDefault(){
+        return new TokenBucketRateLimiter(
+                Constants.maxBucketSize, Constants.tokensPerRefill, Constants.timeBetweenRefills
+        );
+    }
+
     public boolean tryConsumeToken() {
         synchronized (lock) {
             refill();
@@ -29,6 +35,7 @@ public class TokenBucketRateLimiter {
         return false;
 
     }
+
 
     private void refill() {
         synchronized (lock) {
