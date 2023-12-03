@@ -8,8 +8,7 @@ public class TokenBucketRateLimiter {
     private final long timeBetweenRefills;
     private final int maxBucketSize;
     private final AtomicInteger tokensAvailable;
-
-    long lastRefillTime;
+    private long lastRefillTime;
 
 
     public TokenBucketRateLimiter(int maxBucketSize, int tokensPerRefill, long timeBetweenRefills) {

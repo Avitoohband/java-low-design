@@ -11,14 +11,20 @@ import java.util.List;
 public class Main {
 
     public static VendingMachine vendingMachine = new vendingMachineImpl();
+
     public static void main(String[] args) {
 
         vendingMachine.initiateVendingMachine();
 
-        testBuyWithChange();
+//        testBuyNoChange();
+//        testBuyWithChange();
+//        testBuyWithProductNotSelectedException();
+//        testBuyInsufficientPaymentException();
+//        testBuyProductNotSelectedException();
+
     }
 
-    public static void testBuyNoChange(){
+    public static void testBuyNoChange() {
         vendingMachine.insertCoin(Coin.QUARTER);
         vendingMachine.selectProduct(Product.COKE);
 
@@ -30,7 +36,7 @@ public class Main {
 
     }
 
-    public static void testBuyWithChange(){
+    public static void testBuyWithChange() {
         vendingMachine.insertCoin(Coin.QUARTER);
         vendingMachine.insertCoin(Coin.DIME);
 
@@ -43,30 +49,29 @@ public class Main {
 
     }
 
-    public static void testBuyWithProductNotSelectedException(){
+    public static void testBuyWithProductNotSelectedException() {
         try {
             vendingMachine.dispenseItemAndChange();
-        }
-        catch (ProductNotSelectedException ex){
+        } catch (ProductNotSelectedException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public static void testBuyInsufficientPaymentException(){
-            vendingMachine.selectProduct(Product.SODA);
-            vendingMachine.insertCoin(Coin.QUARTER);
+    public static void testBuyInsufficientPaymentException() {
+        vendingMachine.selectProduct(Product.SODA);
+        vendingMachine.insertCoin(Coin.QUARTER);
 
         try {
             vendingMachine.dispenseItemAndChange();
-        }
-        catch (InsufficientPaymentException ex){
+        } catch (InsufficientPaymentException ex) {
             System.out.println(ex.getMessage());
         }
     }
-    public static void testBuyProductNotSelectedException(){
+
+    public static void testBuyProductNotSelectedException() {
         try {
             vendingMachine.selectProduct(Product.SODA);
-        }   catch (OutOfSupplyException ex){
+        } catch (OutOfSupplyException ex) {
             System.out.println(ex.getMessage());
         }
     }

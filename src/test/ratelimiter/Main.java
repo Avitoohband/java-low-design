@@ -10,7 +10,7 @@ public class Main {
                 );
 
         int numberOfSuccessfulConsumes = 0;
-        int numberOfUnsuccessfulConsumes = 0;
+        long numberOfUnsuccessfulConsumes = 0;
 
         long startTimeMillis = System.currentTimeMillis();
 
@@ -22,7 +22,7 @@ public class Main {
                 numberOfSuccessfulConsumes++;
             }else {
                 numberOfUnsuccessfulConsumes++;
-                if(numberOfUnsuccessfulConsumes % 1_000_000_00 == 0){
+                if(numberOfUnsuccessfulConsumes % 100_000_000 == 0){
                     System.out.println(numberOfUnsuccessfulConsumes + ": requests have been blocked.");
 
                 }
