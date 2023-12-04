@@ -6,10 +6,7 @@ import exception.venidingmachine.InsufficientPaymentException;
 import exception.venidingmachine.OutOfSupplyException;
 import util.CollectionUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class vendingMachineImpl implements VendingMachine {
     private final Inventory<Coin> coinInventory = new Inventory<>();
@@ -63,9 +60,8 @@ public class vendingMachineImpl implements VendingMachine {
                 List<Coin> change = dispenseChange(changeNeeded);
                 bucket = new Bucket<>(selectedProduct, change);
             } catch (InsufficientChangeException ex) {
-                System.out.println(ex.getMessage());
                 resetCurrentBuy();
-                return null;
+                throw ex;
             }
         } else if (currentBalance == itemPrice) {
             bucket = new Bucket<>(selectedProduct, Collections.emptyList());
