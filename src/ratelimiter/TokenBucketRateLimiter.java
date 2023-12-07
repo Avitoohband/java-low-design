@@ -10,8 +10,7 @@ public class TokenBucketRateLimiter {
     private final AtomicInteger tokensAvailable;
     private long lastRefillTime;
 
-
-    public TokenBucketRateLimiter(int maxBucketSize, int tokensPerRefill, long timeBetweenRefills) {
+    private TokenBucketRateLimiter(int maxBucketSize, int tokensPerRefill, long timeBetweenRefills) {
         this.timeBetweenRefills = timeBetweenRefills;
         this.maxBucketSize = maxBucketSize;
         this.tokensPerRefill = tokensPerRefill;
