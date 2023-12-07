@@ -4,7 +4,7 @@ import parkinglot.vehicle.VehicleType.VehicleType;
 
 public class ParkingSpotTwoWheels extends ParkingSpot{
 
-    public ParkingSpotTwoWheels(VehicleType vehicleType) {
-        super(vehicleType);
+    public ParkingSpotTwoWheels() {
+        super(VehicleType.TWO_WHEEL);
     }
 }

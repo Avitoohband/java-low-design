@@ -1,67 +1,60 @@
 package parkinglot.parkingspot;
 
+import exception.parkinglot.NotOccupiedParkingException;
+import exception.parkinglot.OccupiedParkingException;
+import exception.parkinglot.UnsuitableParkingException;
 import parkinglot.vehicle.VehicleType.VehicleType;
 
 public abstract class ParkingSpot {
-    private final VehicleType vehicleType;
+    private final VehicleType suitableVehicleType;
     private boolean isEmpty;
-    private VehicleType occupiedBy;
-    private int vehicleCount;
 
 
     public ParkingSpot(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
+        this.suitableVehicleType = vehicleType;
         this.isEmpty = Constants.EMPTY;
-        this.vehicleCount = Constants.NO_VEHICLES;
     }
 
-    public VehicleType getVehicleType() {
-        return vehicleType;
+    public static ParkingSpot ofVehicleType(VehicleType vehicleType) {
+        if (VehicleType.TWO_WHEEL.equals(vehicleType)) {
+            return new ParkingSpotTwoWheels();
+        }
+        return new ParkingSpotFourWheels();
+    }
+
+    public VehicleType getSuitableVehicleType() {
+        return suitableVehicleType;
     }
 
     public boolean getIsEmpty() {
         return isEmpty;
     }
 
-    public int getVehicleCount() {
-        return vehicleCount;
-    }
-
-    public VehicleType getOccupiedBy(){
-        return this.occupiedBy;
-    }
 
     public void setIsEmpty(boolean isEmpty) {
         this.isEmpty = isEmpty;
     }
 
-    public void setOccupiedBy(VehicleType vehicleType){
-        this.occupiedBy = vehicleType;
-    }
 
-    public void setVehicleCount(int vehicleCount) {
-        this.vehicleCount = vehicleCount;
-    }
-
-    public void park(VehicleType vehicleType){
-        switch (vehicleType){
-            case FOUR_WHEEL -> {
-                if (!getIsEmpty()){
-                    throw new ParkingSpotIsOccupiedException(
-                            "Parking spot is already occupied!");
-                }
-                if(!this.vehicleType.equals(vehicleType)){
-                    throw new ParkingSpotUnsuitableException(
-                            "This parking spot is for: " + this.vehicleType.getType());
-                }
-
-                setVehicleCount(1);
-                setOccupiedBy(vehicleType);
-                setIsEmpty(false);
-            }
-            case TWO_WHEEL -> {
-
-            }
+    public void park(VehicleType vehicleType) {
+        if (!this.suitableVehicleType.equals(vehicleType)) {
+            throw new UnsuitableParkingException(
+                    "This parking spot is for: " + this.suitableVehicleType.getType());
         }
+        if (!getIsEmpty()) {
+            throw new OccupiedParkingException(
+                    "Parking spot is already occupied!");
+        }
+        setIsEmpty(false);
     }
+
+    public void vacate() {
+        if (isEmpty) {
+            throw new NotOccupiedParkingException(
+                    "Parking spot is not occupied!");
+        }
+        setIsEmpty(true);
+    }
+
+
 }
