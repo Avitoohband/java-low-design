@@ -10,7 +10,7 @@ public abstract class ParkingSpot {
     private boolean isEmpty;
 
 
-    public ParkingSpot(VehicleType vehicleType) {
+    protected ParkingSpot(VehicleType vehicleType) {
         this.suitableVehicleType = vehicleType;
         this.isEmpty = Constants.EMPTY;
     }
