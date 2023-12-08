@@ -27,30 +27,29 @@ public class StackAllOfOne {
     public void updateAll(int value) {
         this.timestamp = System.currentTimeMillis();
         this.allValue = value;
-        stackObjectList.clear();
     }
 
     public int pop() {
         if (isEmpty()) {
-            return -1;
+            throw new RuntimeException("Stack is empty!");
         }
-        StackObject last = stackObjectList.getLast();
+        StackObject first = stackObjectList.getFirst();
 
-        if (timestampHigherThan(last)) {
-            return allValue;
+        if (timestampHigherThan(first)) {
+            first.value = allValue;
         }
-        stackObjectList.removeLast();
-        return last.value;
+        stackObjectList.removeFirst();
+        return first.value;
     }
 
 
     public int peek() {
         if (isEmpty()) {
-            return -1;
+            throw new RuntimeException("Stack is empty!");
         }
-        StackObject last = stackObjectList.getLast();
+        StackObject first = stackObjectList.getFirst();
 
-        return timestampHigherThan(last) ? allValue : last.value;
+        return timestampHigherThan(first) ? allValue : first.value;
     }
 
     private boolean timestampHigherThan(StackObject last) {
@@ -64,13 +63,14 @@ public class StackAllOfOne {
 
 
     private class StackObject {
-        private final int value;
+        private int value;
         private final long timestamp;
 
         public StackObject(int value) {
             this.value = value;
             this.timestamp = System.currentTimeMillis();
         }
+
 
     }
 }

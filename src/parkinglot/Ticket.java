@@ -1,18 +1,21 @@
 package parkinglot;
 
+import java.util.Date;
+
 public class Ticket {
-    private final long enterTime;
+    private final Date enterTime;
+    private int parkingNumber;
     private double price;
     private final String vehiclePlateNumber;
-    private long exitTime;
+    private Date exitTime;
 
 
     public Ticket(String vehiclePlateNumber) {
         this.vehiclePlateNumber = vehiclePlateNumber;
-        this.enterTime = System.currentTimeMillis();
+        this.enterTime = new Date();
     }
 
-    public long getEnterTime() {
+    public Date getEnterTime() {
         return enterTime;
     }
 
@@ -28,19 +31,24 @@ public class Ticket {
         this.price = price;
     }
 
-    public long getExitTime() {
+    public Date getExitTime() {
         return exitTime;
     }
 
-    public void setExitTime(long exitTime) {
+    public void setExitTime(Date exitTime) {
         this.exitTime = exitTime;
     }
 
-    public double checkOut() {
-        setExitTime(System.currentTimeMillis());
-        setPrice(
-                (double) (getExitTime() - getEnterTime()) / 3600
-        );
-        return getPrice();
+    public void checkOut(){
+        setExitTime(new Date());
+
     }
+
+//    public double checkOut() {
+//        setExitTime(System.currentTimeMillis());
+//        setPrice(
+//                (double) (getExitTime() - getEnterTime()) / 3600
+//        );
+//        return getPrice();
+//    }
 }
