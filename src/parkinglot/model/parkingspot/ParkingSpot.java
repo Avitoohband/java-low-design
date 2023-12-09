@@ -63,29 +63,4 @@ public abstract class ParkingSpot {
         setIsEmpty(true);
         setOccupiedBy(null);
     }
-
-
-//    public void park(VehicleType vehicleType) {
-//        if (!this.suitableVehicleType.equals(vehicleType)) {
-//            throw new UnsuitableParkingException(
-//                    "This parking spot is for: " + this.suitableVehicleType
-//            );
-//        }
-//        if (!getIsEmpty()) {
-//            throw new OccupiedParkingException(
-//                    "Parking spot is already occupied!");
-//        }
-//        setIsEmpty(false);
-//    }
-
-
-//    public void vacate() {
-//        if (isEmpty) {
-//            throw new NotOccupiedParkingException(
-//                    "Parking spot is not occupied!");
-//        }
-//        setIsEmpty(true);
-//    }
-
-
 }

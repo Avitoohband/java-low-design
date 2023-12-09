@@ -7,7 +7,7 @@ import parkinglot.strategy.CostStrategy;
 
 public interface Parking {
 
-    public Ticket park(Vehicle vehicle) throws ParkingFullException;
+    public Ticket park(Vehicle vehicle);
     public Ticket unPark(Ticket ticket, CostStrategy costStrategy);
 
 }

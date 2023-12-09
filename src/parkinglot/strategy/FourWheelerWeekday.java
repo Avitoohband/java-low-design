@@ -6,6 +6,6 @@ public class FourWheelerWeekday implements CostStrategy{
 
     @Override
     public double calculateCost(Ticket ticket) {
-        private hourlyPrice = 20
+        return getDefaultPrice(ticket);
     }
 }
