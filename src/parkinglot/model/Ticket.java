@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.model;
 
 import java.util.Date;
 
@@ -39,16 +39,19 @@ public class Ticket {
         this.exitTime = exitTime;
     }
 
-    public void checkOut(){
-        setExitTime(new Date());
-
+    public int getParkingNumber() {
+        return parkingNumber;
     }
 
-//    public double checkOut() {
-//        setExitTime(System.currentTimeMillis());
+    public void setParkingNumber(int parkingNumber) {
+        this.parkingNumber = parkingNumber;
+    }
+
+    public void  checkOut() {
+        setExitTime(new Date());
 //        setPrice(
-//                (double) (getExitTime() - getEnterTime()) / 3600
+//                ((getExitTime().getTime() - getEnterTime().getTime())) * ((double) 20 / 3600)
 //        );
 //        return getPrice();
-//    }
+    }
 }

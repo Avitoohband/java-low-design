@@ -1,6 +1,4 @@
-package parkinglot.vehicle;
-
-import parkinglot.vehicle.VehicleType.VehicleType;
+package parkinglot.model.vehicle;
 
 import java.util.UUID;
 

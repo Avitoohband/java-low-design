@@ -1,6 +1,6 @@
-package parkinglot.parkingspot;
+package parkinglot.model.parkingspot;
 
-import parkinglot.vehicle.VehicleType.VehicleType;
+import parkinglot.model.vehicle.VehicleType;
 
 public class ParkingSpotTwoWheels extends ParkingSpot{
 

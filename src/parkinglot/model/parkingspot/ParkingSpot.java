@@ -1,6 +1,7 @@
-package parkinglot.parkingspot;
+package parkinglot.model.parkingspot;
 
-import parkinglot.vehicle.VehicleType.VehicleType;
+import parkinglot.Constants;
+import parkinglot.model.vehicle.VehicleType;
 
 public abstract class ParkingSpot {
     public static int parkingAmount = 0;
