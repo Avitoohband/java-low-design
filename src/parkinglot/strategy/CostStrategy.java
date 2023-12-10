@@ -1,6 +1,6 @@
 package parkinglot.strategy;
 
-import exception.parkinglot.IllegalTicketException;
+import exception.parkinglot.VehicleNotFoundException;
 import parkinglot.Constants;
 import parkinglot.model.Ticket;
 
@@ -10,7 +10,7 @@ public interface CostStrategy {
 
     default double getDefaultPrice(Ticket ticket) {
         if (Objects.isNull(ticket.getEnterTime()) || Objects.isNull(ticket.getExitTime())){
-            throw new IllegalTicketException("Ticket need to be sign in and check out");
+            throw new VehicleNotFoundException("Ticket need to be sign in and check out");
         }
         long timePeriod = ticket.getExitTime().getTime() - ticket.getEnterTime().getTime();
 

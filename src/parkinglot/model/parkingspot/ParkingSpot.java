@@ -1,14 +1,16 @@
 package parkinglot.model.parkingspot;
 
 import parkinglot.Constants;
+import parkinglot.model.vehicle.Vehicle;
 import parkinglot.model.vehicle.VehicleType;
 
 public abstract class ParkingSpot {
+
     public static int parkingAmount = 0;
 
     private final int parkingNumber;
     private final VehicleType suitableVehicleType;
-    private VehicleType occupiedBy;
+    private Vehicle occupiedBy;
     private boolean isEmpty;
 
     static {
@@ -45,16 +47,16 @@ public abstract class ParkingSpot {
         this.isEmpty = isEmpty;
     }
 
-    public VehicleType getOccupiedBy() {
+    public Vehicle getOccupiedBy() {
         return occupiedBy;
     }
 
-    public void setOccupiedBy(VehicleType occupiedBy) {
+    public void setOccupiedBy(Vehicle occupiedBy) {
         this.occupiedBy = occupiedBy;
     }
 
-    public void park(VehicleType vehicleType){
-        setOccupiedBy(vehicleType);
+    public void park(Vehicle vehicle){
+        setOccupiedBy(vehicle);
         setIsEmpty(false);
 
     }

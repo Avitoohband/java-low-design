@@ -10,8 +10,9 @@ public class Ticket {
     private Date exitTime;
 
 
-    public Ticket(String vehiclePlateNumber) {
+    public Ticket(String vehiclePlateNumber, int parkingNumber) {
         this.vehiclePlateNumber = vehiclePlateNumber;
+        this.parkingNumber = parkingNumber;
         this.enterTime = new Date();
     }
 
@@ -47,11 +48,7 @@ public class Ticket {
         this.parkingNumber = parkingNumber;
     }
 
-    public void  checkOut() {
+    public void checkOut() {
         setExitTime(new Date());
-//        setPrice(
-//                ((getExitTime().getTime() - getEnterTime().getTime())) * ((double) 20 / 3600)
-//        );
-//        return getPrice();
     }
 }

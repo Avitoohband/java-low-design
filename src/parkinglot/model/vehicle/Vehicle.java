@@ -1,5 +1,6 @@
 package parkinglot.model.vehicle;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Vehicle {
@@ -29,5 +30,18 @@ public class Vehicle {
 
     public String getVehiclePlate() {
         return vehiclePlate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return vehicleType == vehicle.vehicleType && Objects.equals(vehiclePlate, vehicle.vehiclePlate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vehicleType, vehiclePlate);
     }
 }
