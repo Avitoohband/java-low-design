@@ -70,21 +70,21 @@ public class Main {
 
     private static void twoWheelWeekdayParkUnparkSuccess(ParkingManager parkingManager, Vehicle twoWheelVehicle) throws InterruptedException {
         Ticket ticket = parkingManager.park(twoWheelVehicle);
-        Thread.sleep(250);
+        Thread.sleep(SLEEP_TIME);
         parkingManager.unPark(ticket, new TwoWheelerWeekday());
         System.out.println(ticket);
     }
 
     private static void fourWheelWeekendParkUnparkSuccess(ParkingManager parkingManager, Vehicle fourWheelVehicle) throws InterruptedException {
         Ticket ticket = parkingManager.park(fourWheelVehicle);
-        Thread.sleep(250);
+        Thread.sleep(SLEEP_TIME);
         parkingManager.unPark(ticket, new FourWheelerWeekday());
         System.out.println(ticket);
     }
 
     private static void fourWheelWeekdayParkUnparkSuccess(ParkingManager parkingManager, Vehicle fourWheelVehicle) throws InterruptedException {
         Ticket ticket = parkingManager.park(fourWheelVehicle);
-        Thread.sleep(250);
+        Thread.sleep(SLEEP_TIME);
         parkingManager.unPark(ticket, new FourWheelerWeekend());
         System.out.println(ticket);
     }
