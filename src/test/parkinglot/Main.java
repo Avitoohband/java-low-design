@@ -10,6 +10,8 @@ import parkinglot.strategy.*;
 
 public class Main {
 
+    private static final int SLEEP_TIME = 250;
+
     public static void main(String[] args) throws InterruptedException {
         ParkingManager parkingManager = ParkingManager.getParkingManager();
 
@@ -61,7 +63,7 @@ public class Main {
 
     private static void twoWheelWeekendParkUnparkSuccess(ParkingManager parkingManager, Vehicle twoWheelVehicle) throws InterruptedException {
         Ticket ticket = parkingManager.park(twoWheelVehicle);
-        Thread.sleep(250);
+        Thread.sleep(SLEEP_TIME);
         parkingManager.unPark(ticket, new TwoWheelerWeekend());
         System.out.println(ticket);
     }
