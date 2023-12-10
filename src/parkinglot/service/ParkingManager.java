@@ -45,7 +45,7 @@ public class ParkingManager implements Parking {
             for (ParkingSpot spot : parkingSpots) {
                 if (spot.getIsEmpty() && spot.getSuitableVehicleType().equals(vehicle.getVehicleType())) {
                     spot.park(vehicle);
-                    vehicleToSpotMap.put(vehicle.getVehiclePlate(), parkingSpots.indexOf(spot))   ;
+                    vehicleToSpotMap.put(vehicle.getVehiclePlate().trim(), parkingSpots.indexOf(spot))  ;
                     return new Ticket(vehicle.getVehiclePlate(), spot.getParkingNumber());
                 }
             }
@@ -56,9 +56,9 @@ public class ParkingManager implements Parking {
 
     @Override
     public Ticket unPark(Ticket ticket, CostStrategy costStrategy) {
-        Integer spotIndex = vehicleToSpotMap.get(ticket.getVehiclePlateNumber());
+        Integer spotIndex = vehicleToSpotMap.get(ticket.getVehiclePlateNumber().trim());
 
-        if(Objects.nonNull(spotIndex)){
+        if(Objects.isNull(spotIndex)){
             throw new VehicleNotFoundException("Vehicle is not in the parking lot");
         }
         ParkingSpot spot = parkingSpots.get(spotIndex);

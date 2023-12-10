@@ -3,11 +3,11 @@ package parkinglot.model;
 import java.util.Date;
 
 public class Ticket {
-    private final Date enterTime;
     private int parkingNumber;
-    private double price;
     private final String vehiclePlateNumber;
+    private final Date enterTime;
     private Date exitTime;
+    private double price;
 
 
     public Ticket(String vehiclePlateNumber, int parkingNumber) {
@@ -50,5 +50,16 @@ public class Ticket {
 
     public void checkOut() {
         setExitTime(new Date());
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "parkingNumber=" + parkingNumber +
+                ", vehiclePlateNumber='" + vehiclePlateNumber + '\'' +
+                ", enterTime=" + enterTime +
+                ", exitTime=" + exitTime +
+                ", price=" + price +
+                '}';
     }
 }

@@ -2,7 +2,7 @@ package parkinglot;
 
 public class Constants {
 
-    public static final boolean EMPTY = false;
+    public static final boolean EMPTY = true;
     public static final int HOURLY_PRICE = 20;
     public static final int SECONDS_PER_HOUR = 3600;
     public static final double WEEKEND_PERCENT = 1.5;
