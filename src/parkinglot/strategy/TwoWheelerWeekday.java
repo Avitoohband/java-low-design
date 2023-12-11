@@ -3,9 +3,12 @@ package parkinglot.strategy;
 import parkinglot.Constants;
 import parkinglot.model.Ticket;
 
-public class TwoWheelerWeekday implements CostStrategy{
+import java.math.BigDecimal;
+
+public class TwoWheelerWeekday implements CostStrategy {
     @Override
-    public double calculateCost(Ticket ticket) {
-        return getDefaultPrice(ticket) * Constants.TWO_WHEELER_PERCENT;
+    public BigDecimal calculateCost(Ticket ticket) {
+        return (getDefaultPrice(ticket)
+                .multiply(BigDecimal.valueOf(Constants.TWO_WHEELER_PERCENT)));
     }
 }

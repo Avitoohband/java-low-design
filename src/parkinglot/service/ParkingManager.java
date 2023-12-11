@@ -11,7 +11,7 @@ import util.CollectionUtil;
 
 import java.util.*;
 
-public class ParkingManager implements Parking {
+public class ParkingManager implements ParkingHandler {
     private static volatile ParkingManager parkingManager;
     private final List<ParkingSpot> parkingSpots;
     private final Map<String, Integer> vehicleToSpotMap;

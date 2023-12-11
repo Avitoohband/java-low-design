@@ -1,22 +1,24 @@
 package parkinglot.model;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Ticket {
     private int parkingNumber;
     private final String vehiclePlateNumber;
-    private final Date enterTime;
-    private Date exitTime;
-    private double price;
+    private final LocalDateTime enterTime;
+    private LocalDateTime exitTime;
+    private BigDecimal price;
 
 
     public Ticket(String vehiclePlateNumber, int parkingNumber) {
         this.vehiclePlateNumber = vehiclePlateNumber;
         this.parkingNumber = parkingNumber;
-        this.enterTime = new Date();
+        this.enterTime = LocalDateTime.now();
     }
 
-    public Date getEnterTime() {
+    public LocalDateTime getEnterTime() {
         return enterTime;
     }
 
@@ -24,19 +26,19 @@ public class Ticket {
         return vehiclePlateNumber;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Date getExitTime() {
+    public LocalDateTime getExitTime() {
         return exitTime;
     }
 
-    public void setExitTime(Date exitTime) {
+    public void setExitTime(LocalDateTime exitTime) {
         this.exitTime = exitTime;
     }
 
@@ -49,7 +51,7 @@ public class Ticket {
     }
 
     public void checkOut() {
-        setExitTime(new Date());
+        setExitTime(LocalDateTime.now());
     }
 
     @Override
@@ -57,9 +59,14 @@ public class Ticket {
         return "Ticket{" +
                 "parkingNumber=" + parkingNumber +
                 ", vehiclePlateNumber='" + vehiclePlateNumber + '\'' +
-                ", enterTime=" + enterTime +
-                ", exitTime=" + exitTime +
+                ", enterTime=" + getFormattedDate(enterTime) +
+                ", exitTime=" + getFormattedDate(exitTime) +
                 ", price=" + price +
                 '}';
+    }
+
+    private String getFormattedDate(LocalDateTime localDateTime){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd:HH:mm:ss");
+        return localDateTime.format(formatter);
     }
 }

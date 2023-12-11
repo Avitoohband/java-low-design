@@ -88,6 +88,4 @@ public class Main {
         parkingManager.unPark(ticket, new FourWheelerWeekend());
         System.out.println(ticket);
     }
-
-
 }
