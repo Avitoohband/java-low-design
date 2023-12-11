@@ -1,10 +1,10 @@
-package parkinglot.model.parkingspot;
+package parkinglot.model.parkingslot;
 
 import parkinglot.Constants;
 import parkinglot.model.vehicle.Vehicle;
 import parkinglot.model.vehicle.VehicleType;
 
-public abstract class ParkingSpot {
+public abstract class ParkingSlot {
 
     public static int parkingAmount = 0;
 
@@ -13,21 +13,21 @@ public abstract class ParkingSpot {
     private Vehicle occupiedBy;
     private boolean isEmpty;
 
-        {
+         {
         parkingAmount++;
     }
 
-    protected ParkingSpot(VehicleType vehicleType) {
+    protected ParkingSlot(VehicleType vehicleType) {
         this.parkingNumber = parkingAmount;
         this.suitableVehicleType = vehicleType;
         this.isEmpty = Constants.EMPTY;
     }
 
-    public static ParkingSpot ofVehicleType(VehicleType vehicleType) {
+    public static ParkingSlot ofVehicleType(VehicleType vehicleType) {
         if (VehicleType.TWO_WHEEL.equals(vehicleType)) {
-            return new ParkingSpotTwoWheels();
+            return new ParkingSlotTwoWheels();
         }
-        return new ParkingSpotFourWheels();
+        return new ParkingSlotFourWheels();
     }
 
     public VehicleType getSuitableVehicleType() {

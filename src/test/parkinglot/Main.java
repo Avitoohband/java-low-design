@@ -23,10 +23,10 @@ public class Main {
         Vehicle fourWheelVehicle2 = Vehicle.ofType(VehicleType.FOUR_WHEEL);
         Vehicle fourWheelVehicle3 = Vehicle.ofType(VehicleType.FOUR_WHEEL);
 
-        parkingManager.addParkingSpot(VehicleType.TWO_WHEEL);
-        parkingManager.addParkingSpot(VehicleType.TWO_WHEEL);
-        parkingManager.addParkingSpot(VehicleType.FOUR_WHEEL);
-        parkingManager.addParkingSpot(VehicleType.FOUR_WHEEL);
+        parkingManager.addParkingSlot(VehicleType.TWO_WHEEL);
+        parkingManager.addParkingSlot(VehicleType.TWO_WHEEL);
+        parkingManager.addParkingSlot(VehicleType.FOUR_WHEEL);
+        parkingManager.addParkingSlot(VehicleType.FOUR_WHEEL);
 
 
         twoWheelWeekdayParkUnparkSuccess(parkingManager, twoWheelVehicle);
