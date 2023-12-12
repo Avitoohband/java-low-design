@@ -23,12 +23,6 @@ public class Main {
         Vehicle fourWheelVehicle2 = Vehicle.ofType(VehicleType.FOUR_WHEEL);
         Vehicle fourWheelVehicle3 = Vehicle.ofType(VehicleType.FOUR_WHEEL);
 
-        parkingManager.addParkingSlot(VehicleType.TWO_WHEEL);
-        parkingManager.addParkingSlot(VehicleType.TWO_WHEEL);
-        parkingManager.addParkingSlot(VehicleType.FOUR_WHEEL);
-        parkingManager.addParkingSlot(VehicleType.FOUR_WHEEL);
-
-
         twoWheelWeekdayParkUnparkSuccess(parkingManager, twoWheelVehicle);
         twoWheelWeekendParkUnparkSuccess(parkingManager, twoWheelVehicle);
         fourWheelWeekendParkUnparkSuccess(parkingManager, fourWheelVehicle);
@@ -37,7 +31,7 @@ public class Main {
         parkShouldThrowParkingFullException(parkingManager, fourWheelVehicle, fourWheelVehicle2, fourWheelVehicle3);
 
 
-        }
+    }
 
     private static void parkShouldThrowParkingFullException(ParkingManager parkingManager, Vehicle fourWheelVehicle, Vehicle fourWheelVehicle2, Vehicle fourWheelVehicle3) {
         Ticket ticket1 = parkingManager.park(fourWheelVehicle);
@@ -46,7 +40,7 @@ public class Main {
         try {
             Ticket ticket3 = parkingManager.park(fourWheelVehicle3);
 
-        }catch (ParkingFullException ex){
+        } catch (ParkingFullException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -56,7 +50,7 @@ public class Main {
             parkingManager.unPark(
                     new Ticket("Dummy ticket", 0), new FourWheelerWeekend()
             );
-        }catch (VehicleNotFoundException ex){
+        } catch (VehicleNotFoundException ex) {
             System.out.println(ex.getMessage());
         }
     }

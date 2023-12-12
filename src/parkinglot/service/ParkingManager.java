@@ -17,8 +17,9 @@ public class ParkingManager implements ParkingHandler {
 
 
     private ParkingManager() {
-        this.parkingSlots = new ArrayList<>();
         this.vehicleToSlotMap = new HashMap<>();
+        this.parkingSlots = new ArrayList<>();
+        initializeParkingSlots();
     }
 
     public static ParkingManager getParkingManager() {
@@ -77,6 +78,13 @@ public class ParkingManager implements ParkingHandler {
         parkingSlots.set(slotIndex, slot);
 
         return ticket;
+    }
+
+    private void initializeParkingSlots(){
+        addParkingSlot(VehicleType.TWO_WHEEL);
+        addParkingSlot(VehicleType.TWO_WHEEL);
+        addParkingSlot(VehicleType.FOUR_WHEEL);
+        addParkingSlot(VehicleType.FOUR_WHEEL);
     }
 }
 
