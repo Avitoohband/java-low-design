@@ -24,7 +24,7 @@ public class Elevator {
     }
 
 
-    public static Elevator ofDefault() {
+    public static Elevator ofDefaults() {
         return new Elevator(
                 0,
                 Direction.IDLE
