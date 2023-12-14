@@ -51,7 +51,7 @@ public class Elevator {
         while (!upPendingQueue.isEmpty() || !downPendingQueue.isEmpty()) {
             processRequests();
         }
-        System.out.println("Finished all requests");
+        System.out.println("All requests are finished!");
         setDirection(Direction.IDLE);
     }
 
@@ -122,7 +122,7 @@ public class Elevator {
         }
 
         setDirection(
-                !upPendingQueue.isEmpty() ? Direction.DOWN : Direction.IDLE
+                !upPendingQueue.isEmpty() ? Direction.UP : Direction.IDLE
         );
     }
 
