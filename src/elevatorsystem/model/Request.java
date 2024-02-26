@@ -1,35 +1,33 @@
 package elevatorsystem.model;
 
-public class Request implements Comparable<Request> {
-    private final InternalRequest internalRequest;
-    private final ExternalRequest externalRequest;
+public class Request {
+    private final int sourceFloor;
+    private final int destinationFloor;
+    private final Type type;
+    private final Direction direction;
 
-    public Request(InternalRequest internalRequest, ExternalRequest externalRequest) {
-        this.internalRequest = internalRequest;
-        this.externalRequest = externalRequest;
+    public Request(int sourceFloor, int destinationFloor, Type type, Direction direction) {
+        this.sourceFloor = sourceFloor;
+        this.destinationFloor = destinationFloor;
+        this.type = type;
+        this.direction = direction;
     }
 
-    public InternalRequest getInternalRequest() {
-        return internalRequest;
+    public int getSourceFloor() {
+        return sourceFloor;
     }
 
-    public ExternalRequest getExternalRequest() {
-        return externalRequest;
+    public int getDestinationFloor() {
+        return destinationFloor;
     }
 
-    public void setInternalRequest(InternalRequest internalRequest) {
-        this.internalRequest.setDestinationFloor(internalRequest.getDestinationFloor());
-
+    public Type getType() {
+        return type;
     }
 
-    public void setExternalRequest(ExternalRequest externalRequest) {
-        this.externalRequest.setSourceFloor(externalRequest.getSourceFloor());
-        this.externalRequest.setDirection(externalRequest.getDirection());
+    public Direction getDirection() {
+        return direction;
     }
 
-    @Override
-    public int compareTo(Request req) {
-        return Integer.compare(getInternalRequest().getDestinationFloor(),
-                req.getInternalRequest().getDestinationFloor());
-    }
+
 }
